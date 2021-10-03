@@ -41,18 +41,17 @@ class User{
         if(!is_string($this->email)){
             $this->error_validation = "O Email tem que ser um Texto";
             return false;
-        }
-
-        // Validação Regex ---> Substitui o que não pertencer ao REGEX
-        $regex_email ="/^[_a-z0-9-]+(\.[_a-z0-9\-]+)*\@[a-z0-9\-]+(\.[a-z0-9\-]+)*(\.[a-z]{2,4})$/";
-
-        if(!preg_match($regex_email, $this->email)){
-            $this->error_validation = "O Email deve estar no seguinte ".
-                "formato: ******@******.xxxx (Somente Letras Minusculas)";
-            return false;
         } else if(strlen($this->email) < 5 || strlen($this->email) >= 120){
             $this->error_validation = "Somente é permitido de 5 à 120 Caracteres
             no Email";
+            return false;
+        }
+
+        // Validação Regex ---> Substitui o que não pertencer ao REGEX
+        $regex_email ="/^[_a-z0-9-]+(\.[_a-z0-9\-]+)*\@[a-z0-9\-]+(\.[a-z0-9\-]+)*(\.[a-z]{2,4})$/i";
+        if(!preg_match($regex_email, $this->email)){
+            $this->error_validation = "O Email deve estar no seguinte ".
+                "Formato: <br/>emailUsuario@******.xxx";
             return false;
         }
         return true;

@@ -3,7 +3,6 @@ class HandlerDatabase{
 
     public $connection;
 
-
     public function OpenConnection(){
         try
         {

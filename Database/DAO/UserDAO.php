@@ -1,9 +1,11 @@
 <?php
-include_once "../Database/ADO/HandlerDatabase.php";
+//todo arrumar :adicionar variavel HOME PATH
+include_once "../../Database/ADO/HandlerDatabase.php";
+include_once "../../Model/User.php";
 
 class UserDAO{
 
-    // Obtemm o Usuario a partir do Nome+Email OU pelo Id(Opcional)
+    // Obtem o Usuario a partir do Nome+Email OU pelo Id(Opcional)
     public function GetUser($user_name, $user_email, $user_id=0)
     {
         try{
@@ -19,9 +21,18 @@ class UserDAO{
                 $sql_command->execute(array($user_id));
             }
             else {
+                // Instancia e Valida um Usuario
+                $user = new User(htmlspecialchars($user_name),
+                    htmlspecialchars($user_email));
+                $user->ValidationEmail();
+                $user->ValidationName();
+
+                $message_validation = $user->error_validation;
+                if($message_validation != "") return $message_validation;
+
                 $sql_command = $connection->prepare(
                     "SELECT * FROM user WHERE name=? AND email=?");
-                $sql_command->execute(array($user_name, $user_email));
+                $sql_command->execute(array($user->name, $user->email));
             }
 
 
@@ -49,6 +60,15 @@ class UserDAO{
                 return "Usuario já Cadastrado no Banco de Dados";
             }
 
+            // Instancia e Valida um Usuario
+            $user = new User(htmlspecialchars($user_name),
+                htmlspecialchars($user_email));
+            $user->ValidationEmail();
+            $user->ValidationName();
+
+            $message_validation = $user->error_validation;
+            if($message_validation != "") return $message_validation;
+
             $database = new HandlerDatabase();
             $database->OpenConnection();
             $connection = $database->connection;
@@ -57,7 +77,7 @@ class UserDAO{
             $sql_command = $connection->prepare(
                 "INSERT INTO user(name, email) VALUE (?,?)");
 
-            if($sql_command->execute(array($user_name, $user_email))){
+            if($sql_command->execute(array($user->name, $user->email))){
                 // Inserção bem Sucedida
                 return "";
             } else{
@@ -81,11 +101,20 @@ class UserDAO{
             $database->OpenConnection();
             $connection = $database->connection;
 
+            // Instancia e Valida um Usuario
+            $user = new User(htmlspecialchars($user_name),
+                htmlspecialchars($user_email));
+            $user->ValidationEmail();
+            $user->ValidationName();
+
+            $message_validation = $user->error_validation;
+            if($message_validation != "") return $message_validation;
+
             // Prepara e Executa a query SQL
             $sql_command = $connection->prepare(
                 "UPDATE user SET name=?, email=? WHERE id_user=?");
 
-            if($sql_command->execute(array($user_name, $user_email, $user_id))){
+            if($sql_command->execute(array($user->name, $user->email, $user_id))){
                 // Atualização bem sucedida
                 return "";
             } else{
@@ -101,7 +130,7 @@ class UserDAO{
     public function DeleteUser($user_name, $user_email)
     {
         try{
-            // Obtem o Usuario pelo ID e retorna caso tenha erro
+            // Valida e Obtem o Usuario pelo ID. Retorna caso tenha erro
             $result_sql = $this->GetUser($user_name, $user_email);
             if(!is_array($result_sql)) return $result_sql;
 
@@ -136,7 +165,7 @@ class UserDAO{
             $connection = $database->connection;
 
             // Prepara e Executa a query SQL
-            $sql_command = $connection->prepare("SELECT * FROM user");
+            $sql_command = $connection->prepare("SELECT * FROM user ORDER BY id_user");
             $sql_command->execute();
 
             // Cria um Array e Obtem os dados se Existirem

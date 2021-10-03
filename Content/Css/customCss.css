@@ -1,0 +1,10 @@
+.center{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.padding_end{
+    padding-bottom: 50px;
+    padding-bottom: 3.125rem;
+}
