@@ -1,0 +1,22 @@
+RewriteEngine On
+
+# Protegendo o .htacess
+<files ~ "^.*\.([Hh][Tt][Aa])">
+    order allow,deny
+    deny from all
+    satisfy all
+</files>
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# Não Permite a Listagem de Diretorios
+Options -Indexes
+
+# Diretorio Incial
+DirectoryIndex index.php
+
+# todo: Implementar restrição ao diretorio e arquivos de forma direta
+
+RewriteRule ^(.+)$ index.php?path=$1 [QSA,L]

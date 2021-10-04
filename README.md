@@ -80,11 +80,15 @@ code .
 - [6. Atribuição de Variavel](https://pt.stackoverflow.com/questions/165692/como-pegar-valor-de-variável-dentro-de-uma-function-em-uma-classe-para-outra-fun)
 - [7. Regex - Replace Characters in String (Adaptado)](https://www.devmedia.com.br/expressoes-regulares-em-php/25076)
 - [8. Regex - Email Validation (Adaptado)](https://stackoverflow.com/questions/13719821/email-validation-using-regular-expression-in-php)
-
+- [9. Verificando Diretorios e Arquivos](https://www.visualdicas.com.br/programacao/php/89-verificando-se-um-arquivo-ou-diretorio-existe-com-php)
+- [10. Importação de Arquivos via PHP (Adaptado)](https://www.ti-enxame.com/pt/php/como-importarincluir-um-arquivo-css-usando-php-codigo-e-nao-codigo-html/972478064/)
+- [11. Configurando WAMP e .htaccess](http://www.diogomatheus.com.br/blog/zend-framework/personalizando-urls-locais-no-wamp-server/)
+- [12. Restrição de Acesso pela URL](https://qastack.com.br/programming/9282124/deny-direct-access-to-a-folder-and-file-by-htaccess)
 
 ### Recursos de Layout
 - [1. Semantic UI](https://semantic-ui.com)
 - [2. Pixel X rem X em](https://tableless.com.br/unidade-pixels-em-rem/)
+- [3. Pacote Semantic UI Online](https://cdnjs.com/libraries/semantic-ui)
 
 ### Correções
 - [1. Caminho Atual de um Arquivo PHP (Debug)](https://pt.stackoverflow.com/questions/202713/)
